@@ -16,14 +16,20 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg"
-          alt="Industrial warehouse with packaging materials"
-          className="w-full h-full object-cover" />
-
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-primary/30 inline-block"></div>
+      {/* Background Video with Overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/assets/hero-poster.jpg"
+        >
+          <source src="/assets/video/stock-video-inside-the-warehouse-of-car-factory-camera-is-moving-between-racks-with-paperboxes-workers-are.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-primary/30"></div>
       </div>
 
       {/* Content */}
