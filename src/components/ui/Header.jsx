@@ -46,9 +46,11 @@ const Header = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">DN</span>
-                </div>
+                <img
+                  src="/assets/images/1.svg"
+                  alt="DN Trading logo"
+                  className="h-8 w-auto transform origin-center scale-[1.728]"
+                />
                 <div className="flex flex-col">
                   <span className="text-primary font-bold text-lg leading-none">DN Trading</span>
                   <span className="text-muted-foreground text-xs leading-none">Industrial Packaging</span>
@@ -84,7 +86,7 @@ const Header = () => {
               onClick={(e)=>{ e.preventDefault(); setIsLPDEOpen(true);} }
               className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
             >
-              LPDE Pouch Caluclutor
+              LDPE Pouch Calculator
             </a>
           </nav>
 
@@ -156,7 +158,7 @@ const Header = () => {
                 className="block text-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                LPDE Pouch Caluclutor
+                LDPE Pouch Calculator
               </a>
               
               {/* Mobile CTA Buttons */}

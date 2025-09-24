@@ -8,18 +8,14 @@ const FAQSection = () => {
     {
       id: 1,
       question: "What are the risks of switching packaging suppliers?",
-      answer: `We understand supplier switching concerns. That's why we offer:\n\n• Risk-free trial orders to test quality\n• Gradual transition plans to minimize disruption\n• Quality matching guarantees for existing packaging\n• Dedicated account manager for smooth onboarding\n• 30-day satisfaction guarantee with full refund option\n\nOur 98% client retention rate speaks to our commitment to long-term partnerships.`
+      answer: `We understand supplier switching concerns. That's why we offer:\n\n• Risk-free trial orders to test quality\n• Gradual transition plans to minimize disruption\n• Quality matching guarantees for existing packaging\n• Dedicated account manager for smooth onboarding\n\nOur 98% client retention rate speaks to our commitment to long-term partnerships.`
     },
     {
       id: 2,
       question: "How do your prices compare to other suppliers?",
-      answer: `Our pricing strategy focuses on total value, not just unit cost:\n\n• Competitive base pricing with volume discounts\n• No hidden fees or surprise charges\n• Cost savings through optimized packaging design\n• Reduced waste and improved efficiency\n• Transparent pricing with detailed breakdowns\n\nMost clients see 15-35% total cost reduction within 6 months through our optimization approach.`
+      answer: `Our pricing strategy focuses on total value, not just unit cost:\n\n• Competitive base pricing with volume discounts\n• No hidden fees or surprise charges\n• Cost savings through optimized packaging design\n• Reduced waste and improved efficiency\n\nMost clients see 15-35% total cost reduction within 6 months through our optimization approach.`
     },
-    {
-      id: 3,
-      question: "What quality assurance processes do you follow?",
-      answer: `Our quality assurance is comprehensive and certified:\n\n• ISO 9001:2015 Quality Management System\n• ISO 14001:2015 Environmental Management\n• HACCP certification for food-grade packaging\n• BIS approval for Indian standards compliance\n• In-house testing laboratory with certified equipment\n• Batch tracking and quality documentation\n• Third-party quality audits quarterly\n\nEvery batch undergoes rigorous testing before dispatch.`
-    },
+    
     {
       id: 4,
       question: "What are your delivery timelines and reliability?",
@@ -113,7 +109,7 @@ const FAQSection = () => {
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
                 <Icon name="Phone" size={20} className="mr-2" />
-                Call Expert: +91 81263 74473
+                Call Expert: +91 81263 74473 / +91 81487 85048
               </a>
               <a
                 href="mailto:admin@dntrading.co.in"

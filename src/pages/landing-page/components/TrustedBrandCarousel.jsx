@@ -53,10 +53,10 @@ const TrustedBrandCarousel = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Trusted by Industry Leaders
+            Trusted by Leading Manufacturers
           </h2>
           <p className="text-xl text-muted-foreground">
-            Join 500+ manufacturing companies who trust us with their packaging needs
+            Join 50+ manufacturing companies who trust us with their packaging needs
           </p>
         </div>
 
@@ -70,7 +70,7 @@ const TrustedBrandCarousel = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">500+</div>
+            <div className="text-3xl font-bold text-primary mb-2">50+</div>
             <div className="text-muted-foreground">Trusted Clients</div>
           </div>
           <div className="text-center">

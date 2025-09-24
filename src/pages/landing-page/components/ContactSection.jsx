@@ -10,6 +10,7 @@ const ContactSection = () => {
     contactPerson: '',
     email: '',
     phone: '',
+    message: '',
     industry: '',
     companySize: '',
     packagingType: '',
@@ -87,6 +88,7 @@ const ContactSection = () => {
       contactPerson: '',
       email: '',
       phone: '',
+      message: '',
       industry: '',
       companySize: '',
       packagingType: '',
@@ -110,7 +112,7 @@ const ContactSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Get Your Custom Quote Today
+            Contact Us
           </h2>
           <p className="text-xl text-muted-foreground">
             Tell us about your packaging needs and get a detailed quote within 24 hours
@@ -120,7 +122,7 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Quote Request Form */}
           <div className="bg-card rounded-xl p-8 shadow-lg border border-border">
-            <h3 className="text-2xl font-semibold text-foreground mb-6">Request Detailed Quote</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-6">Send us a message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Basic Information */}
@@ -155,11 +157,22 @@ const ContactSection = () => {
                 <Input
                   label="Phone Number"
                   type="tel"
-                  placeholder="+91 81263 74473"
+                  placeholder="+91 81263 74473 / +91 81487 85048"
                   value={formData?.phone}
                   onChange={(e) => handleInputChange('phone', e?.target?.value)}
                   required
                 />
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Message</label>
+                  <textarea
+                    className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                    rows={5}
+                    placeholder="Write your message..."
+                    value={formData?.message}
+                    onChange={(e) => handleInputChange('message', e?.target?.value)}
+                  />
+                </div>
               </div>
 
               {/* Detailed Requirements (Progressive Disclosure) */}
@@ -214,14 +227,15 @@ const ContactSection = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Specific Requirements
+                      Message
                     </label>
                     <textarea
                       className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                      rows={4}
-                      placeholder="Please describe your specific packaging requirements, dimensions, special features, etc."
+                      rows={5}
+                      placeholder="Write your message..."
                       value={formData?.requirements}
                       onChange={(e) => handleInputChange('requirements', e?.target?.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -236,7 +250,7 @@ const ContactSection = () => {
                 iconName="Send"
                 iconPosition="left"
               >
-                {isSubmitting ? 'Submitting Request...' : 'Get Detailed Quote'}
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>
             </form>
           </div>
@@ -265,7 +279,7 @@ const ContactSection = () => {
                       iconName="Phone"
                       iconPosition="left"
                     >
-                      +91 81263 74473
+                      +91 81263 74473 / +91 81487 85048
                     </Button>
                   </div>
                 </div>
@@ -318,20 +332,11 @@ const ContactSection = () => {
 
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <Icon name="Clock" size={20} className="text-primary" />
-                  <div>
-                    <div className="font-medium text-foreground">Business Hours</div>
-                    <div className="text-muted-foreground">Mon-Sat: 9:00 AM - 6:00 PM IST</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
                   <Icon name="MapPin" size={20} className="text-primary" />
                   <div>
                     <div className="font-medium text-foreground">Head Office</div>
                     <div className="text-muted-foreground">
-                      Industrial Area, Phase-II<br />
-                      Chandigarh, Punjab 160002
+                      SIDCUL, Rudrapur, Uttarkhand 263153
                     </div>
                   </div>
                 </div>

@@ -55,58 +55,7 @@ const ProductCategoryGrid = () => {
     }
   ];
 
-  return (
-    <section className="py-16 bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Complete Packaging Solutions
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From basic supplies to custom sustainable packaging, we deliver the right solution for every industrial need
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories?.map((category) => (
-            <div
-              key={category?.id}
-              className="relative bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border border-border"
-              onMouseEnter={() => setHoveredCategory(category?.id)}
-              onMouseLeave={() => setHoveredCategory(null)}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
-                  <Icon name={category?.icon} size={24} color="white" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">{category?.name}</h3>
-              </div>
-
-              <p className="text-muted-foreground mb-4">{category?.description}</p>
-
-              {/* Hover Overlay */}
-              {hoveredCategory === category?.id && (
-                <div className="absolute inset-0 bg-primary/95 rounded-xl p-6 flex flex-col justify-center transition-all duration-300">
-                  <h4 className="text-white font-semibold mb-3">Key Specifications</h4>
-                  <p className="text-white/90 text-sm mb-4">{category?.specs}</p>
-                  
-                  <h4 className="text-white font-semibold mb-2">Applications</h4>
-                  <ul className="text-white/90 text-sm space-y-1">
-                    {category?.applications?.map((app, index) => (
-                      <li key={index} className="flex items-center">
-                        <Icon name="Check" size={16} className="mr-2 text-accent" />
-                        {app}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return null;
 };
 
 export default ProductCategoryGrid;

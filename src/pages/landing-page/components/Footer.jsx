@@ -33,14 +33,7 @@ const Footer = () => {
     'Manufacturing'
   ];
 
-  const certifications = [
-    'ISO 9001:2015',
-    'ISO 14001:2015',
-    'HACCP Certified',
-    'BIS Approved',
-    'FDA Compliant',
-    'Export Quality'
-  ];
+  const certifications = [];
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -70,7 +63,7 @@ const Footer = () => {
                 <div className="flex items-center space-x-3">
                   <Icon name="Phone" size={18} className="text-accent" />
                   <a href="tel:+91-81263-74473" className="text-primary-foreground/80 hover:text-accent transition-colors">
-                    +91 81263 74473
+                    +91 81263 74473 / +91 81487 85048
                   </a>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -82,8 +75,7 @@ const Footer = () => {
                 <div className="flex items-start space-x-3">
                   <Icon name="MapPin" size={18} className="text-accent mt-1" />
                   <div className="text-primary-foreground/80">
-                    Industrial Area, Phase-II<br />
-                    Chandigarh, Punjab 160002
+                    SIDCUL, Rudrapur, Uttarkhand 263153
                   </div>
                 </div>
               </div>
@@ -123,23 +115,13 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Industries & Certifications */}
+            {/* Industries */}
             <div>
               <h3 className="text-lg font-semibold mb-6">Industries Served</h3>
               <div className="grid grid-cols-2 gap-2 mb-6">
                 {industries?.map((industry) => (
                   <div key={industry} className="text-primary-foreground/80 text-sm">
                     {industry}
-                  </div>
-                ))}
-              </div>
-
-              <h4 className="font-semibold mb-3">Certifications</h4>
-              <div className="space-y-2">
-                {certifications?.map((cert) => (
-                  <div key={cert} className="flex items-center space-x-2">
-                    <Icon name="CheckCircle" size={14} className="text-accent" />
-                    <span className="text-primary-foreground/80 text-sm">{cert}</span>
                   </div>
                 ))}
               </div>

@@ -31,7 +31,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             Complete Industrial Packaging Solutions for 
-            <span className="text-accent"> Manufacturing Excellence</span>
+            <span className="text-accent"> Manufacturing</span>
           </h1>
           
           <p className="text-xl sm:text-2xl text-white/90 mb-8 leading-relaxed">
@@ -66,7 +66,7 @@ const HeroSection = () => {
               href="tel:+91-81263-74473"
               className="text-accent hover:text-accent/80 font-semibold text-xl transition-colors">
 
-              +91 81263 74473
+              +91 81263 74473 / +91 81487 85048
             </a>
           </div>
         </div>
