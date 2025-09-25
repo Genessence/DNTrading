@@ -3,49 +3,23 @@ import BrandMarquee from 'components/ui/BrandMarquee';
 
 const TrustedBrandCarousel = () => {
   const trustedBrands = [
-    {
-      id: 1,
-      name: "Tata Steel",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "Steel Manufacturing"
-    },
-    {
-      id: 2,
-      name: "Reliance Industries",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "Petrochemicals"
-    },
-    {
-      id: 3,
-      name: "Mahindra Group",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "Automotive"
-    },
-    {
-      id: 4,
-      name: "ITC Limited",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "FMCG"
-    },
-    {
-      id: 5,
-      name: "Bajaj Auto",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "Automotive"
-    },
-    {
-      id: 6,
-      name: "Asian Paints",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "Chemicals"
-    },
-    {
-      id: 7,
-      name: "Godrej Group",
-      logo: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg",
-      industry: "Consumer Goods"
-    },
-    // Removed L&T Construction per request
+    { id: 1, name: "", src: "/assets/images/t1.svg", alt: "Partner t1", scale: 2 },
+    { id: 2, name: "", src: "/assets/images/t2.svg", alt: "Partner t2", scale: 1.5 },
+    { id: 3, name: "", src: "/assets/images/t3.svg", alt: "Partner t3", scale: 1.5 },
+    { id: 4, name: "", src: "/assets/images/t4.svg", alt: "Partner t4", scale: 2 },
+    { id: 5, name: "", src: "/assets/images/t5.svg", alt: "Partner t5", scale: 2.5 },
+    { id: 6, name: "", src: "/assets/images/t6.svg", alt: "Partner t6", scale: 2.5 },
+    { id: 7, name: "", src: "/assets/images/t7.svg", alt: "Partner t7", scale: 2.5 },
+    { id: 8, name: "", src: "/assets/images/t8.svg", alt: "Partner t8", scale: 2.5 },
+    { id: 9, name: "", src: "/assets/images/t9.svg", alt: "Partner t9", scale: 1.5 },
+    { id: 10, name: "", src: "/assets/images/t10.svg", alt: "Partner t10", scale: 2.5 },
+    { id: 11, name: "", src: "/assets/images/t11.svg", alt: "Partner t11", scale: 2.5 },
+    { id: 12, name: "", src: "/assets/images/t12.svg", alt: "Partner t12", scale: 2.5 },
+    { id: 13, name: "", src: "/assets/images/t13.svg", alt: "Partner t13", scale: 1.7 },
+    { id: 14, name: "", src: "/assets/images/t14.svg", alt: "Partner t14", scale: 1.5 },
+    { id: 15, name: "", src: "/assets/images/t15.svg", alt: "Partner t15", scale: 2 },
+    { id: 16, name: "", src: "/assets/images/t16.svg", alt: "Partner t16", scale: 1.5},
+    { id: 17, name: "", src: "/assets/images/t17.svg", alt: "Partner t17", scale: 1.75 },
   ];
 
   return (
@@ -60,12 +34,12 @@ const TrustedBrandCarousel = () => {
           </p>
         </div>
 
-        {/* Marquee of brand logos/names */}
-        <BrandMarquee
-          items={trustedBrands.map(b => ({ name: b.name }))}
-          background="transparent"
-          loopSeconds={20}
-        />
+    {/* Marquee of brand logos */}
+    <BrandMarquee
+      items={trustedBrands.map(b => ({ name: b.name, src: b.src, alt: b.alt || b.name, scale: b.scale }))}
+      background="transparent"
+      loopSeconds={20}
+    />
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">

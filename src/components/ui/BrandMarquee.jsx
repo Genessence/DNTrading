@@ -32,24 +32,24 @@ export default function BrandMarquee({ items = [], background = 'transparent', l
         // Pause on hover/focus using CSS
       >
         <div
-          className="flex"
+          className="flex w-fit"
           style={{
             animation: `marquee-scroll ${loopSeconds}s linear infinite`,
-            // Pause on hover or when any child receives focus
             animationPlayState: 'running',
+            willChange: 'transform',
           }}
         >
           {/* Single track repeated twice for seamless loop */}
           {[0, 1].map((half) => (
             <ul
               key={half}
-              className={`flex items-center shrink-0 gap-6 md:gap-12 ${half === 0 ? 'pr-3 md:pr-6' : 'pl-3 md:pl-6'}`}
+              className={"flex items-center shrink-0"}
               aria-hidden={half === 1 ? true : undefined}
             >
-              {items.map((item, idx) => (
+            {items.map((item, idx) => (
                 <li
                   key={`${half}-${idx}`}
-                  className="flex-none shrink-0"
+                  className={`flex-none shrink-0 mx-6 md:mx-12 first:ml-6 last:mr-6 md:first:ml-12 md:last:mr-12 ${item.itemClass || ''}`}
                 >
                   {item.src ? (
                     <a
@@ -62,7 +62,10 @@ export default function BrandMarquee({ items = [], background = 'transparent', l
                         src={item.src}
                         alt={item.alt || item.name || ''}
                         className="h-10 md:h-[60px] max-w-none object-contain"
-                        style={{ filter: 'none' }}
+                        style={{ 
+                          filter: 'none',
+                          ...(item.scale ? { transform: `scale(${item.scale})`, transformOrigin: 'center' } : {})
+                        }}
                       />
                     </a>
                   ) : (
@@ -79,6 +82,7 @@ export default function BrandMarquee({ items = [], background = 'transparent', l
                   )}
                 </li>
               ))}
+            {/* No extra spacer; seam gap controlled via first track padding-right */}
             </ul>
           ))}
         </div>
