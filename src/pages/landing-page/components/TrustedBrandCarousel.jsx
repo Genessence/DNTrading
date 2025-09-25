@@ -38,7 +38,7 @@ const TrustedBrandCarousel = () => {
     <BrandMarquee
       items={trustedBrands.map(b => ({ name: b.name, src: b.src, alt: b.alt || b.name, scale: b.scale }))}
       background="transparent"
-      loopSeconds={20}
+      loopSeconds={40}
     />
 
         {/* Stats */}
