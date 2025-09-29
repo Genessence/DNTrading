@@ -61,26 +61,6 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={toggleSolutions}
-              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-              aria-expanded={isSolutionsOpen}
-              aria-controls="solutions-dropdown"
-            >
-              Solutions
-            </button>
-            <button 
-              onClick={toggleSupplies}
-              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-            >
-              Supplies
-            </button>
-            <a 
-              href="#services" 
-              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-            >
-              Services
-            </a>
             <a 
               href="#lpde-pouch-calculator" 
               onClick={(e)=>{ e.preventDefault(); setIsLPDEOpen(true);} }
@@ -132,27 +112,7 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-background">
             <div className="px-4 py-3 space-y-3">
-              <a 
-                href="#solutions" 
-                className="block text-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Solutions
-              </a>
-              <a 
-                href="#supplies" 
-                className="block text-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Supplies
-              </a>
-              <a 
-                href="#services" 
-                className="block text-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Services
-              </a>
+              
               <a 
                 href="#lpde-pouch-calculator" 
                 className="block text-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
@@ -194,11 +154,7 @@ const Header = () => {
           </div>
         )}
       </div>
-      {/* Full-width Supplies dropdown */}
-      <SuppliesDropdown open={isSuppliesOpen} onClose={() => setIsSuppliesOpen(false)} />
-      <div id="solutions-dropdown">
-        <SolutionsDropdown open={isSolutionsOpen} onClose={() => setIsSolutionsOpen(false)} />
-      </div>
+      {/* Dropdowns removed as per request */}
       <LPDEMmodal open={isLPDEOpen} onClose={()=> setIsLPDEOpen(false)} />
     </header>
   );

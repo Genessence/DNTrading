@@ -157,7 +157,7 @@ const ContactSection = () => {
                 <Input
                   label="Phone Number"
                   type="tel"
-                  placeholder="+91 81263 74473 / +91 81487 85048"
+                  placeholder="+91 81263 74473"
                   value={formData?.phone}
                   onChange={(e) => handleInputChange('phone', e?.target?.value)}
                   required

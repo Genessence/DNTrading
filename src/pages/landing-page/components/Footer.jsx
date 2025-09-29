@@ -44,9 +44,11 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-1">
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                  <span className="text-accent-foreground font-bold text-lg">DN</span>
-                </div>
+                <img
+                  src="/assets/images/1.svg"
+                  alt="DN Trading logo"
+                  className="h-8 w-auto transform origin-center scale-[1.728]"
+                />
                 <div className="flex flex-col">
                   <span className="font-bold text-xl leading-none">DN Trading</span>
                   <span className="text-primary-foreground/80 text-sm leading-none">Industrial Packaging</span>

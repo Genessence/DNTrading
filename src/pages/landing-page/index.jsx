@@ -57,21 +57,18 @@ const LandingPage = () => {
           <ProductCategoryGrid />
         </section>
 
-        {/* Trusted Brand Carousel */}
-        <TrustedBrandCarousel />
-
         {/* Industrial Expertise Showcase */}
         <section id="about">
           <ExpertiseShowcase />
         </section>
 
+        {/* Trusted Brand Carousel */}
+        <TrustedBrandCarousel />
+
         {/* Interactive Product Showcase */}
         <ProductShowcase />
 
-        {/* Customer Testimonials with Video */}
-        <section id="testimonials">
-          <TestimonialsCarousel />
-        </section>
+        {/* Testimonials section removed as requested */}
 
         {/* Contact & Quote Request Section */}
         <section id="contact">

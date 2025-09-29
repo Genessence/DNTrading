@@ -18,69 +18,83 @@ const ProductShowcase = () => {
   const products = [
     {
       id: 1,
-      name: "LDPE Food Grade Pouches",
-      category: "food",
-      image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
-      specs: "25-200 microns • FDA approved • Custom printing available",
-      applications: ["Food packaging", "Pharmaceutical", "Retail"],
-      price: "₹2.50 - ₹15.00 per piece",
-      minOrder: "1000 pieces",
-      sustainability: "Recyclable"
+      name: "Biodegradable Packaging",
+      category: "sustainable",
+      image: "/assets/images/2.svg",
+      specs: "100% industrial biodegradable • Compostable • Custom sizes",
+      applications: ["Sustainable goods", "E-commerce", "Retail"],
+      moq: "MOQ - 250 KG",
+      sustainability: "Compostable"
     },
     {
       id: 2,
-      name: "Industrial Stretch Wrap",
+      name: "Bubble Roll & Pouches",
       category: "industrial",
-      image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
-      specs: "High tensile strength • Weather resistant • Multiple widths",
-      applications: ["Pallet wrapping", "Construction", "Machinery"],
-      price: "₹180 - ₹350 per roll",
-      minOrder: "50 rolls",
+      image: "/assets/images/4.svg",
+      specs: "Air bubble roll & bags • Cushioning protection • Various widths",
+      applications: ["Fragile goods", "Logistics", "E-commerce"],
+      moq: "MOQ - 10 Rolls",
       sustainability: "Recyclable"
     },
     {
       id: 3,
-      name: "Biodegradable Packaging",
-      category: "sustainable",
-      image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
-      specs: "100% compostable • Plant-based materials • Custom sizes",
-      applications: ["Organic products", "E-commerce", "Retail"],
-      price: "₹5.00 - ₹25.00 per piece",
-      minOrder: "500 pieces",
-      sustainability: "Compostable"
+      name: "Stretch Film - Manual & Machine Grade",
+      category: "industrial",
+      image: "/assets/images/3.svg",
+      specs: "High cling • Puncture resistant • Manual & machine grade",
+      applications: ["Pallet wrapping", "Warehouse", "Shipping"],
+      moq: "MOQ - 500 KG",
+      sustainability: "Recyclable"
     },
     {
       id: 4,
-      name: "Custom Printed Bags",
-      category: "custom",
-      image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
-      specs: "Multi-color printing • Various materials • Brand customization",
-      applications: ["Branding", "Retail", "Promotional"],
-      price: "₹8.00 - ₹45.00 per piece",
-      minOrder: "2000 pieces",
+      name: "PET Strip",
+      category: "industrial",
+      image: "/assets/images/5.svg",
+      specs: "High tensile PET strapping • Various widths & thicknesses",
+      applications: ["Unitizing", "Bundling", "Securing loads"],
+      moq: "MOQ - 300 KG",
       sustainability: "Recyclable"
     },
     {
       id: 5,
-      name: "Anti-Static Pouches",
+      name: "PP Strip",
       category: "industrial",
-      image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
-      specs: "ESD protection • Transparent • Heat sealable",
-      applications: ["Electronics", "Components", "Medical devices"],
-      price: "₹12.00 - ₹35.00 per piece",
-      minOrder: "1000 pieces",
+      image: "/assets/images/6.svg",
+      specs: "Polypropylene strapping • Light-to-medium duty",
+      applications: ["Carton strapping", "Bundles", "Parcels"],
+      moq: "MOQ - 300 KG",
       sustainability: "Recyclable"
     },
     {
       id: 6,
-      name: "Vacuum Packaging Bags",
+      name: "LDPE Pouches - Transparent & Printed",
       category: "food",
       image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
-      specs: "Barrier properties • Extended shelf life • Various sizes",
-      applications: ["Food preservation", "Medical", "Industrial"],
-      price: "₹4.00 - ₹20.00 per piece",
-      minOrder: "1500 pieces",
+      specs: "25–200 microns • Custom sizes • Printing available",
+      applications: ["Industrial parts", "Hardware", "Retail"],
+      moq: "MOQ - 500 KG",
       sustainability: "Recyclable"
+    },
+    {
+      id: 7,
+      name: "Sanding Belts",
+      category: "industrial",
+      image: "/assets/images/8.svg",
+      specs: "Aluminum oxide/zirconia • Multiple grits & sizes",
+      applications: ["Metal finishing", "Woodworking", "Fabrication"],
+      moq: "MOQ - 50 PC",
+      sustainability: "—"
+    },
+    {
+      id: 8,
+      name: "Emery Belts",
+      category: "industrial",
+      image: "/assets/images/7.svg",
+      specs: "Emery cloth belts • Fine finishing • Various sizes",
+      applications: ["Polishing", "Deburring", "Finishing"],
+      moq: "MOQ - 50 PC",
+      sustainability: "—"
     }
   ];
 
@@ -155,7 +169,82 @@ const ProductShowcase = () => {
 
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-foreground mb-2">{product?.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{product?.specs}</p>
+                <p className="text-sm text-muted-foreground mb-2">{product?.specs}</p>
+                <div className="mb-4">
+                  {product?.name === 'Biodegradable Packaging' ? (
+                    <a
+                      href="/products/biodegradable-packaging"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about Biodegradable Packaging"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'Bubble Roll & Pouches' ? (
+                    <a
+                      href="/products/bubble-bags"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about Bubble Roll & Pouches"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'Stretch Film - Manual & Machine Grade' ? (
+                    <a
+                      href="/products/stretch-film"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about Stretch Film"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'LDPE Pouches - Transparent & Printed' ? (
+                    <a
+                      href="/products/ldpe-pouches"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about LDPE Pouches"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'PP Strip' ? (
+                    <a
+                      href="/products/pp-strip"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about PP Strip"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'PET Strip' ? (
+                    <a
+                      href="/products/pet-strip"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about PET Strip"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'Sanding Belts' ? (
+                    <a
+                      href="/products/sanding-belts"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about Sanding Belts"
+                    >
+                      View More
+                    </a>
+                  ) : product?.name === 'Emery Belts' ? (
+                    <a
+                      href="/products/emery-belts"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label="View more about Emery Belts"
+                    >
+                      View More
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      className="text-primary hover:underline text-sm font-medium"
+                      aria-label={`View more about ${product?.name}`}
+                    >
+                      View More
+                    </button>
+                  )}
+                </div>
 
                 <div className="mb-4">
                   <h4 className="font-medium text-foreground mb-2">Applications:</h4>
@@ -171,14 +260,10 @@ const ProductShowcase = () => {
                   </div>
                 </div>
 
-                <div className="mb-4 space-y-2">
+                <div className="mb-4">
                   <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Price Range:</span>
-                    <span className="text-sm font-medium text-foreground">{product?.price}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Min Order:</span>
-                    <span className="text-sm font-medium text-foreground">{product?.minOrder}</span>
+                    <span className="text-sm text-muted-foreground">Min Order (MOQ):</span>
+                    <span className="text-sm font-medium text-foreground">{product?.moq}</span>
                   </div>
                 </div>
 
