@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from 'components/AppIcon';
 import Image from 'components/AppImage';
 import Button from 'components/ui/Button';
 
 const ProductShowcase = () => {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProducts, setSelectedProducts] = useState([]);
 
@@ -68,26 +70,6 @@ const ProductShowcase = () => {
     },
     {
       id: 6,
-      name: "LDPE Pouches - Transparent & Printed",
-      category: "food",
-      image: "/assets/images/s1.webp",
-      specs: "25–200 microns • Custom sizes • Printing available",
-      applications: ["Industrial parts", "Hardware", "Retail"],
-      moq: "MOQ - 500 KG",
-      sustainability: "Recyclable"
-    },
-    {
-      id: 7,
-      name: "Sanding Belts",
-      category: "industrial",
-      image: "/assets/images/8.svg",
-      specs: "Aluminum oxide/zirconia • Multiple grits & sizes",
-      applications: ["Metal finishing", "Woodworking", "Fabrication"],
-      moq: "MOQ - 50 PC",
-      sustainability: "—"
-    },
-    {
-      id: 8,
       name: "Emery Belts",
       category: "industrial",
       image: "/assets/images/7.svg",
@@ -134,7 +116,7 @@ const ProductShowcase = () => {
           {filteredProducts?.map((product) => (
             <div
               key={product?.id}
-              className="bg-card rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border"
+              className="bg-card rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border flex flex-col h-full"
             >
               <div className="relative">
                 <Image
@@ -144,7 +126,7 @@ const ProductShowcase = () => {
                 />
               </div>
 
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold text-foreground mb-2">{product?.name}</h3>
                 <div className="mb-4">
                   {product?.name === 'Biodegradable Packaging' ? (
@@ -171,14 +153,6 @@ const ProductShowcase = () => {
                     >
                       View More
                     </a>
-                  ) : product?.name === 'LDPE Pouches - Transparent & Printed' ? (
-                    <a
-                      href="/products/ldpe-pouches"
-                      className="text-primary hover:underline text-sm font-medium"
-                      aria-label="View more about LDPE Pouches"
-                    >
-                      View More
-                    </a>
                   ) : product?.name === 'PP Strip' ? (
                     <a
                       href="/products/pp-strip"
@@ -192,14 +166,6 @@ const ProductShowcase = () => {
                       href="/products/pet-strip"
                       className="text-primary hover:underline text-sm font-medium"
                       aria-label="View more about PET Strip"
-                    >
-                      View More
-                    </a>
-                  ) : product?.name === 'Sanding Belts' ? (
-                    <a
-                      href="/products/sanding-belts"
-                      className="text-primary hover:underline text-sm font-medium"
-                      aria-label="View more about Sanding Belts"
                     >
                       View More
                     </a>
@@ -243,18 +209,34 @@ const ProductShowcase = () => {
                   </div>
                 </div>
 
-                <Button
-                  variant={selectedProducts?.includes(product?.id) ? "default" : "outline"}
-                  fullWidth
-                  onClick={() => handleAddToQuote(product?.id)}
-                  iconName={selectedProducts?.includes(product?.id) ? "Check" : "Plus"}
-                  iconPosition="left"
-                >
-                  {selectedProducts?.includes(product?.id) ? "Added to Quote" : "Add to Quote"}
-                </Button>
+                <div className="mt-auto">
+                  <Button
+                    variant={selectedProducts?.includes(product?.id) ? "default" : "outline"}
+                    fullWidth
+                    onClick={() => handleAddToQuote(product?.id)}
+                    iconName={selectedProducts?.includes(product?.id) ? "Check" : "Plus"}
+                    iconPosition="left"
+                  >
+                    {selectedProducts?.includes(product?.id) ? "Added to Quote" : "Add to Quote"}
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Products Button */}
+        <div className="text-center mb-8">
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => navigate('/products')}
+            iconName="Grid3x3"
+            iconPosition="left"
+            className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            View All Products
+          </Button>
         </div>
 
         {/* Quote Summary */}
@@ -275,6 +257,18 @@ const ProductShowcase = () => {
             >
               Request Detailed Quote
             </Button>
+            <div className="mt-4">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => navigate('/products')}
+                iconName="Grid3x3"
+                iconPosition="left"
+                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              >
+                View All Products
+              </Button>
+            </div>
           </div>
         )}
       </div>
