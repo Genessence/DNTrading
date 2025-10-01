@@ -4,6 +4,7 @@ import ScrollToTop from "components/ScrollToTop";
 import ErrorBoundary from "components/ErrorBoundary";
 import NotFound from "pages/NotFound";
 import LandingPage from './pages/landing-page';
+import ProductsPage from './pages/ProductsPage';
 import BiodegradablePackaging from 'pages/products/BiodegradablePackaging';
 import BubbleBags from 'pages/products/BubbleBags';
 import StretchFilm from 'pages/products/StretchFilm';
@@ -22,6 +23,7 @@ const Routes = () => {
         {/* Define your route here */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
+        <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/biodegradable-packaging" element={<BiodegradablePackaging />} />
         <Route path="/products/bubble-bags" element={<BubbleBags />} />
         <Route path="/products/stretch-film" element={<StretchFilm />} />
