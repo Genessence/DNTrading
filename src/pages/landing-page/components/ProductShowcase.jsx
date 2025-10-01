@@ -70,7 +70,7 @@ const ProductShowcase = () => {
       id: 6,
       name: "LDPE Pouches - Transparent & Printed",
       category: "food",
-      image: "https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg",
+      image: "/assets/images/s1.webp",
       specs: "25–200 microns • Custom sizes • Printing available",
       applications: ["Industrial parts", "Hardware", "Retail"],
       moq: "MOQ - 500 KG",
@@ -129,24 +129,6 @@ const ProductShowcase = () => {
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {filters?.map((filter) => (
-            <button
-              key={filter?.id}
-              onClick={() => setActiveFilter(filter?.id)}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-                activeFilter === filter?.id
-                  ? 'bg-primary text-primary-foreground shadow-lg'
-                  : 'bg-card text-foreground hover:bg-primary/10 border border-border'
-              }`}
-            >
-              <Icon name={filter?.icon} size={20} />
-              <span>{filter?.label}</span>
-            </button>
-          ))}
-        </div>
-
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {filteredProducts?.map((product) => (
@@ -158,18 +140,12 @@ const ProductShowcase = () => {
                 <Image
                   src={product?.image}
                   alt={product?.name}
-                  className="w-full h-48 object-cover"
+                  className={`w-full h-48 object-cover ${product?.name === 'LDPE Pouches - Transparent & Printed' ? 'scale-[0.8] transform' : ''}`}
                 />
-                <div className="absolute top-4 right-4">
-                  <div className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium">
-                    {product?.sustainability}
-                  </div>
-                </div>
               </div>
 
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-foreground mb-2">{product?.name}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{product?.specs}</p>
                 <div className="mb-4">
                   {product?.name === 'Biodegradable Packaging' ? (
                     <a

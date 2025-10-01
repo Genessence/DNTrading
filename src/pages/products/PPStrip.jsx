@@ -1,12 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from 'components/ui/Header';
 import Footer from 'pages/landing-page/components/Footer';
 import Button from 'components/ui/Button';
 
 const PPStrip = () => {
+  const navigate = useNavigate();
+  
   const handleContact = (e) => {
     e?.preventDefault();
-    window.location.href = '#contact';
+    navigate('/');
+    setTimeout(() => {
+      const contactSection = document.getElementById('quote-section');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   return (

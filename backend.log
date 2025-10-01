@@ -1,0 +1,17 @@
+Contact backend listening on http://localhost:5050
+[CONTACT_ERROR] Error: Invalid login: 535 5.7.139 Authentication unsuccessful, SmtpClientAuthentication is disabled for the Tenant. Visit https://aka.ms/smtp_auth_disabled for more information. [PN4PR01CA0029.INDPRD01.PROD.OUTLOOK.COM 2025-09-29T13:17:45.310Z 08DDFE952C9C7AE0]
+    at SMTPConnection._formatError (/Users/vagish/Desktop/DNtarding/node_modules/nodemailer/lib/smtp-connection/index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (/Users/vagish/Desktop/DNtarding/node_modules/nodemailer/lib/smtp-connection/index.js:1588:34)
+    at SMTPConnection.<anonymous> (/Users/vagish/Desktop/DNtarding/node_modules/nodemailer/lib/smtp-connection/index.js:1542:18)
+    at SMTPConnection._processResponse (/Users/vagish/Desktop/DNtarding/node_modules/nodemailer/lib/smtp-connection/index.js:993:20)
+    at SMTPConnection._onData (/Users/vagish/Desktop/DNtarding/node_modules/nodemailer/lib/smtp-connection/index.js:774:14)
+    at SMTPConnection._onSocketData (/Users/vagish/Desktop/DNtarding/node_modules/nodemailer/lib/smtp-connection/index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535 5.7.139 Authentication unsuccessful, SmtpClientAuthentication is disabled for the Tenant. Visit https://aka.ms/smtp_auth_disabled for more information. [PN4PR01CA0029.INDPRD01.PROD.OUTLOOK.COM 2025-09-29T13:17:45.310Z 08DDFE952C9C7AE0]',
+  responseCode: 535,
+  command: 'AUTH LOGIN'
+}

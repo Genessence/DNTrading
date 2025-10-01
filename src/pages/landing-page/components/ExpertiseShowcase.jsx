@@ -78,7 +78,7 @@ const ExpertiseShowcase = () => {
                 <div className="text-sm text-muted-foreground">Client Retention</div>
               </div>
               <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary mb-2">&gt;25hrs</div>
+                <div className="text-2xl font-bold text-primary mb-2">&lt;25hrs</div>
                 <div className="text-sm text-muted-foreground">Avg Response Time</div>
               </div>
             </div>
