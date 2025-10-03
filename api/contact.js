@@ -1,10 +1,15 @@
 import nodemailer from 'nodemailer';
 
 function createTransport() {
+  const port = Number(process.env.EMAIL_PORT || 587);
+  const secure = typeof process.env.EMAIL_SECURE !== 'undefined'
+    ? String(process.env.EMAIL_SECURE).toLowerCase() === 'true'
+    : port === 465;
+
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.office365.com',
-    port: Number(process.env.EMAIL_PORT || 587),
-    secure: false,
+    port,
+    secure,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,

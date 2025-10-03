@@ -21,6 +21,7 @@ const ContactSection = () => {
 
   const [showDetailedForm, setShowDetailedForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const industryOptions = [
     { value: 'automotive', label: 'Automotive' },
@@ -76,27 +77,60 @@ const ContactSection = () => {
     e?.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const valueToLabel = (options, val) => options?.find(o => o?.value === val)?.label || val;
 
-    alert('Quote request submitted successfully! We will contact you within 24 hours.');
-    setIsSubmitting(false);
-    
-    // Reset form
-    setFormData({
-      companyName: '',
-      contactPerson: '',
-      email: '',
-      phone: '',
-      message: '',
-      industry: '',
-      companySize: '',
-      packagingType: '',
-      monthlyVolume: '',
-      requirements: '',
-      urgency: ''
-    });
-    setShowDetailedForm(false);
+      // Map select values to their human-readable labels for email content
+      const payload = {
+        ...formData,
+        industry: valueToLabel(industryOptions, formData?.industry),
+        companySize: valueToLabel(companySizeOptions, formData?.companySize),
+        packagingType: valueToLabel(packagingTypeOptions, formData?.packagingType),
+        urgency: valueToLabel(urgencyOptions, formData?.urgency),
+      };
+
+      const response = await fetch('http://localhost:5050/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        setShowSuccessMessage(true);
+        
+        // Reset form
+        setFormData({
+          companyName: '',
+          contactPerson: '',
+          email: '',
+          phone: '',
+          message: '',
+          industry: '',
+          companySize: '',
+          packagingType: '',
+          monthlyVolume: '',
+          requirements: '',
+          urgency: ''
+        });
+        setShowDetailedForm(false);
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+        }, 5000);
+      } else {
+        alert('Failed to submit request. Please try again or contact us directly.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to submit request. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCallNow = () => {
@@ -227,12 +261,12 @@ const ContactSection = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Message
+                      Requirements
                     </label>
                     <textarea
                       className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                       rows={5}
-                      placeholder="Write your message..."
+                      placeholder="Write your requirements..."
                       value={formData?.requirements}
                       onChange={(e) => handleInputChange('requirements', e?.target?.value)}
                       required
@@ -253,6 +287,32 @@ const ContactSection = () => {
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>
             </form>
+            
+            {/* Success Message */}
+            {showSuccessMessage && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-xl p-8 max-w-md mx-4 transform transition-all duration-300 animate-in slide-in-from-bottom-4 fade-in">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Icon name="Check" size={32} className="text-green-600" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      Quote Request Submitted!
+                    </h3>
+                    <p className="text-gray-600 mb-6">
+                      Thank you for your interest. We will contact you within 24 hours with a detailed quote.
+                    </p>
+                    <Button
+                      variant="default"
+                      onClick={() => setShowSuccessMessage(false)}
+                      className="w-full"
+                    >
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Contact Information */}

@@ -35,10 +35,15 @@ app.use(
 
 // Email transporter (Office 365)
 function createTransport() {
+  const port = Number(process.env.EMAIL_PORT || 587);
+  const secure = typeof process.env.EMAIL_SECURE !== 'undefined'
+    ? String(process.env.EMAIL_SECURE).toLowerCase() === 'true'
+    : port === 465; // auto-use SSL for 465 (Gmail)
+
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.office365.com',
-    port: Number(process.env.EMAIL_PORT || 587),
-    secure: false, // STARTTLS
+    port,
+    secure,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,

@@ -10,10 +10,15 @@ async function main() {
       process.exit(1);
     }
 
+    const port = Number(process.env.EMAIL_PORT || 587);
+    const secure = typeof process.env.EMAIL_SECURE !== 'undefined'
+      ? String(process.env.EMAIL_SECURE).toLowerCase() === 'true'
+      : port === 465;
+
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST || 'smtp.office365.com',
-      port: Number(process.env.EMAIL_PORT || 587),
-      secure: false,
+      port,
+      secure,
       auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
     });
 
@@ -22,7 +27,7 @@ async function main() {
       from: process.env.EMAIL_USER,
       to,
       subject: 'Test email from DN Trading backend',
-      text: 'This is a test email to verify Office365 SMTP credentials.',
+      text: 'This is a test email to verify SMTP credentials.',
     });
 
     console.log('Mail sent:', info.messageId || info);
