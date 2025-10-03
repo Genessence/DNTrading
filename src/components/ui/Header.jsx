@@ -45,7 +45,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <div className="flex items-center space-x-2">
+              <a href="/" aria-label="Go to home" className="flex items-center space-x-2">
                 <img
                   src="/assets/images/1.svg"
                   alt="DN Trading logo"
@@ -55,7 +55,7 @@ const Header = () => {
                   <span className="text-primary font-bold text-lg leading-none">DN Trading</span>
                   <span className="text-muted-foreground text-xs leading-none">Industrial Packaging</span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
