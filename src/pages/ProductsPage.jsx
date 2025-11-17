@@ -326,6 +326,19 @@ const ProductsPage = () => {
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-primary/80 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Back Button */}
+            <div className="mb-6">
+              <Button
+                variant="outline"
+                onClick={() => navigate('/')}
+                iconName="ArrowLeft"
+                iconPosition="left"
+                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm"
+              >
+                Back to Home
+              </Button>
+            </div>
+            
             <div className="text-center text-primary-foreground">
               <h1 className="text-4xl sm:text-5xl font-bold mb-4">
                 Complete Product Catalog
