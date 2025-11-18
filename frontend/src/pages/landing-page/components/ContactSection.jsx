@@ -89,7 +89,8 @@ const ContactSection = () => {
         urgency: valueToLabel(urgencyOptions, formData?.urgency),
       };
 
-      const response = await fetch('http://localhost:5050/contact', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050';
+      const response = await fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
