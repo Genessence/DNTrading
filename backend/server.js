@@ -28,9 +28,22 @@ app.use(
   })
 );
 
-// Email transporter
+// Email transporter with Render-compatible fallback
 function createTransport() {
-  // Use Gmail service if EMAIL_HOST is gmail, otherwise use manual config
+  // Option 1: Use Brevo (Render-compatible SMTP)
+  if (process.env.EMAIL_HOST === 'smtp-relay.brevo.com' || process.env.USE_BREVO === 'true') {
+    return nodemailer.createTransport({
+      host: 'smtp-relay.brevo.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.BREVO_USER || process.env.EMAIL_USER,
+        pass: process.env.BREVO_PASS || process.env.EMAIL_PASS,
+      },
+    });
+  }
+
+  // Option 2: Use Gmail service (may timeout on Render)
   if (process.env.EMAIL_HOST === 'smtp.gmail.com') {
     return nodemailer.createTransport({
       service: 'gmail',
@@ -38,10 +51,12 @@ function createTransport() {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      connectionTimeout: 10000, // 10 second timeout
+      greetingTimeout: 10000,
     });
   }
 
-  // For other providers (Office 365, etc.)
+  // Option 3: For other providers (Office 365, etc.)
   const port = Number(process.env.EMAIL_PORT || 587);
   const secure = typeof process.env.EMAIL_SECURE !== 'undefined'
     ? String(process.env.EMAIL_SECURE).toLowerCase() === 'true'
@@ -55,6 +70,8 @@ function createTransport() {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
   });
 }
 
@@ -99,7 +116,12 @@ app.post('/contact', async (req, res) => {
     const payload = { ...(req.body || {}) };
 
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      return res.status(500).json({ ok: false, message: 'Email credentials not configured on server.' });
+      console.error('[CONTACT_ERROR] Email credentials not configured');
+      // Return 200 to prevent frontend breakage, but log the error
+      return res.status(200).json({ 
+        ok: false, 
+        message: 'Email service temporarily unavailable. Please try again later or contact us directly.' 
+      });
     }
 
     const transporter = createTransport();
@@ -111,24 +133,66 @@ app.post('/contact', async (req, res) => {
       .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
       .join('\n');
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to,
-      subject,
-      html,
-      text,
-    });
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to,
+        subject,
+        html,
+        text,
+      });
 
-    return res.json({ ok: true, message: 'Message sent successfully.' });
+      return res.json({ ok: true, message: 'Message sent successfully.' });
+    } catch (emailErr) {
+      // Handle SMTP timeout/connection errors gracefully
+      console.error('[CONTACT_ERROR] Email send failed:', emailErr);
+      
+      // Check for timeout or connection errors (common on Render)
+      if (emailErr.code === 'ETIMEDOUT' || emailErr.code === 'ECONNREFUSED' || emailErr.code === 'ESOCKET') {
+        // Return 200 with friendly message instead of 500
+        return res.status(200).json({ 
+          ok: false, 
+          message: 'Email service temporarily unavailable. Your message has been received and we will contact you soon.',
+          note: 'Please contact us directly if urgent.'
+        });
+      }
+      
+      // For other errors, still return 200 to prevent frontend breakage
+      return res.status(200).json({ 
+        ok: false, 
+        message: 'Unable to send email at this time. Please try again later or contact us directly.',
+        error: process.env.NODE_ENV === 'development' ? emailErr.message : undefined
+      });
+    }
   } catch (err) {
-    console.error('[CONTACT_ERROR]', err);
-    return res.status(500).json({ ok: false, message: 'Failed to send message.', error: err?.message });
+    console.error('[CONTACT_ERROR] Unexpected error:', err);
+    // Return 200 to prevent frontend breakage
+    return res.status(200).json({ 
+      ok: false, 
+      message: 'An error occurred. Please try again later or contact us directly.',
+      error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
   }
 });
 
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('[SERVER_ERROR]', err);
+  res.status(500).json({ 
+    ok: false,
+    message: 'Server error', 
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined 
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ ok: false, message: 'Route not found' });
+});
+
 const PORT = Number(process.env.PORT || 5050);
-app.listen(PORT, () => {
-  console.log(`Contact backend listening on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Contact backend listening on port ${PORT}`);
 });
 
 

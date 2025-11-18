@@ -25,7 +25,7 @@ const HeroSection = () => {
           loop
           playsInline
           preload="metadata"
-          poster="/assets/hero-poster.jpg"
+          poster="/assets/images/s1.webp"
         >
           <source src="/assets/video/stock-video-inside-the-warehouse-of-car-factory-camera-is-moving-between-racks-with-paperboxes-workers-are.mp4" type="video/mp4" />
         </video>

@@ -124,7 +124,8 @@ const ContactSection = () => {
           setShowSuccessMessage(false);
         }, 5000);
       } else {
-        alert('Failed to submit request. Please try again or contact us directly.');
+        // Show user-friendly error message
+        alert(result.message || 'Failed to submit request. Please try again or contact us directly.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
