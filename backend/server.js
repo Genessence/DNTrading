@@ -33,14 +33,26 @@ app.use(
   })
 );
 
-// Email transporter (Office 365)
+// Email transporter
 function createTransport() {
+  // Use Gmail service if EMAIL_HOST is gmail, otherwise use manual config
+  if (process.env.EMAIL_HOST === 'smtp.gmail.com') {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+  }
+
+  // For other providers (Office 365, etc.)
   const port = Number(process.env.EMAIL_PORT || 587);
   const secure = typeof process.env.EMAIL_SECURE !== 'undefined'
     ? String(process.env.EMAIL_SECURE).toLowerCase() === 'true'
-    : port === 465; // auto-use SSL for 465 (Gmail)
+    : port === 465;
 
-  const transporter = nodemailer.createTransport({
+  return nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.office365.com',
     port,
     secure,
@@ -49,7 +61,6 @@ function createTransport() {
       pass: process.env.EMAIL_PASS,
     },
   });
-  return transporter;
 }
 
 function buildHtmlTableFromObject(obj) {

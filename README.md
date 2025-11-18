@@ -1,196 +1,199 @@
-DN Trading - Contact Backend (Office 365 SMTP)
+# DN Trading - Industrial Packaging Solutions
 
-Overview
-This adds a minimal Node.js/Express backend and a Vercel serverless function to receive contact form submissions and send them to email via Office 365 (Outlook) SMTP.
+A modern full-stack web application for DN Trading, featuring a React frontend and Node.js/Express backend.
 
-Files
-- server.js: Express server for local testing (POST /contact)
-- api/contact.js: Vercel serverless function handler (same behavior)
-- package.json: Scripts and dependencies
-- templates/emailTemplate.html: HTML email template that renders submitted fields in a table
-- test-mail.js: Simple script to verify SMTP credentials
-- .env.example: Example env (use your values). If this file is missing, create it from the content below.
+## 📁 Project Structure
 
-Environment Variables
-Create a .env file (do not commit). Example:
+```
+DNTrading/
+├── frontend/          # React frontend application
+│   ├── src/          # Source code
+│   ├── public/       # Static assets
+│   ├── index.html    # HTML template
+│   └── package.json  # Frontend dependencies
+├── backend/          # Node.js backend API
+│   ├── server.js     # Express server
+│   ├── api/          # API routes
+│   ├── templates/    # Email templates
+│   └── package.json  # Backend dependencies
+└── package.json      # Root workspace configuration
+```
 
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js (v14.x or higher)
+- npm or yarn
+
+### Installation
+
+1. **Install all dependencies:**
+   ```bash
+   npm run install:all
+   ```
+   Or install separately:
+   ```bash
+   # Install root dependencies
+   npm install
+   
+   # Install frontend dependencies
+   cd frontend && npm install
+   
+   # Install backend dependencies
+   cd ../backend && npm install
+   ```
+
+### Running the Application
+
+**Frontend (Development):**
+```bash
+npm run frontend:start
+# or
+cd frontend && npm start
+```
+Frontend runs on `http://localhost:4028`
+
+**Backend (Development):**
+```bash
+npm run backend:start
+# or
+cd backend && npm start
+```
+Backend runs on `http://localhost:5050`
+
+**Backend (Development with NODE_ENV):**
+```bash
+npm run backend:dev
+```
+
+## 🔧 Environment Variables
+
+### Backend (.env in backend/ directory)
+Create a `.env` file in the `backend/` directory:
+
+```env
 EMAIL_HOST=smtp.office365.com
 EMAIL_PORT=587
 EMAIL_USER=admin@dntrading.co.in
 EMAIL_PASS=your-strong-password-here
 EMAIL_RECEIVER=mishravagish14@gmail.com
-ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
-PORT=5000
-
-Install & Run Locally
-1) Install deps
-   npm install
-
-2) Create .env with the variables above
-
-3) Optional: verify SMTP credentials
-   npm run test-mail
-
-4) Start local server
-   npm start
-
-5) Test endpoint (POST /contact)
-   curl -X POST http://localhost:5000/contact \
-     -H "Content-Type: application/json" \
-     -d '{"companyName":"Acme","contactPerson":"John","email":"john@acme.com","phone":"+91 90000 00000","message":"Hello"}'
-
-Frontend Integration (Vite + React)
-Use import.meta.env.VITE_API_URL if present, otherwise default to localhost during development.
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
-async function submitContact(formData) {
-  const res = await fetch(`${API_URL}/contact`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  });
-  const data = await res.json();
-  if (!res.ok || !data.ok) throw new Error(data.message || 'Failed to submit');
-  return data;
-}
-
-Switching Environments
-- Local Dev: VITE_API_URL not set -> defaults to http://localhost:5000
-- Production (Vercel): Set VITE_API_URL to your Vercel domain (e.g., https://your-app.vercel.app). For Vercel serverless function, you can call /api/contact directly from the same origin front-end.
-
-Vercel Deployment
-1) Push the project to a Git repo (already done for frontend)
-2) Import into Vercel
-3) Add Environment Variables in Vercel Project Settings → Environment Variables:
-   - EMAIL_USER=admin@dntrading.co.in
-   - EMAIL_PASS=your-strong-password-here
-   - EMAIL_RECEIVER=mishravagish14@gmail.com
-   - EMAIL_HOST=smtp.office365.com
-   - EMAIL_PORT=587
-
-4) Deploy
-   The serverless function will be available at /api/contact
-
-Office 365 (Outlook) SMTP Notes
-- Host: smtp.office365.com, Port: 587, secure: false (STARTTLS).
-- SMTP AUTH must be enabled on the mailbox/tenant. See Microsoft docs: https://learn.microsoft.com/exchange/clients-and-mobile-in-exchange-online/deprecation-of-basic-authentication-exchange-online
-- If SMTP AUTH is disabled or your tenant requires Modern Auth (OAuth2), basic auth will fail.
-
-Troubleshooting
-- 535/5.7.3 Authentication failed: Check EMAIL_USER/EMAIL_PASS and if SMTP AUTH is enabled.
-- ETIMEDOUT/ECONNRESET: Corporate networks may block outbound 587.
-- TLS errors: Ensure secure: false with STARTTLS is used; Office 365 upgrades connection.
-- If basic auth is disabled, use Microsoft Graph (OAuth2) instead of SMTP.
-
-Migrating to Microsoft Graph (OAuth2) - Brief
-- Register an Azure AD app, grant Mail.Send permissions.
-- Obtain OAuth2 access token via client credentials or delegated flow.
-- Use Graph endpoint: POST https://graph.microsoft.com/v1.0/users/{sender}/sendMail with MIME content.
-- Libraries: @microsoft/microsoft-graph-client.
-
-Email Template
-The backend loads templates/emailTemplate.html and replaces {{TABLE}} with a generated table of all submitted fields.
-
-# React
-
-A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
-
-## 🚀 Features
-
-- **React 18** - React version with improved rendering and concurrent features
-- **Vite** - Lightning-fast build tool and development server
-- **Redux Toolkit** - State management with simplified Redux setup
-- **TailwindCSS** - Utility-first CSS framework with extensive customization
-- **React Router v6** - Declarative routing for React applications
-- **Data Visualization** - Integrated D3.js and Recharts for powerful data visualization
-- **Form Management** - React Hook Form for efficient form handling
-- **Animation** - Framer Motion for smooth UI animations
-- **Testing** - Jest and React Testing Library setup
-
-## 📋 Prerequisites
-
-- Node.js (v14.x or higher)
-- npm or yarn
-
-## 🛠️ Installation
-
-1. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-   
-2. Start the development server:
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
-
-## 📁 Project Structure
-
-```
-react_app/
-├── public/             # Static assets
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/          # Page components
-│   ├── styles/         # Global styles and Tailwind configuration
-│   ├── App.jsx         # Main application component
-│   ├── Routes.jsx      # Application routes
-│   └── index.jsx       # Application entry point
-├── .env                # Environment variables
-├── index.html          # HTML template
-├── package.json        # Project dependencies and scripts
-├── tailwind.config.js  # Tailwind CSS configuration
-└── vite.config.js      # Vite configuration
+ALLOWED_ORIGINS=http://localhost:4028,http://localhost:5173,http://localhost:3000
+PORT=5050
 ```
 
-## 🧩 Adding Routes
+### Frontend (.env in frontend/ directory)
+For production, create a `.env` file in the `frontend/` directory:
 
-To add new routes to the application, update the `Routes.jsx` file:
-
-```jsx
-import { useRoutes } from "react-router-dom";
-import HomePage from "pages/HomePage";
-import AboutPage from "pages/AboutPage";
-
-const ProjectRoutes = () => {
-  let element = useRoutes([
-    { path: "/", element: <HomePage /> },
-    { path: "/about", element: <AboutPage /> },
-    // Add more routes as needed
-  ]);
-
-  return element;
-};
+```env
+VITE_API_URL=http://localhost:5050
 ```
 
-## 🎨 Styling
+## 📦 Available Scripts
 
-This project uses Tailwind CSS for styling. The configuration includes:
+### Root Level
+- `npm run frontend:start` - Start frontend development server
+- `npm run frontend:build` - Build frontend for production
+- `npm run frontend:serve` - Preview production build
+- `npm run backend:start` - Start backend server
+- `npm run backend:dev` - Start backend in development mode
+- `npm run backend:test-mail` - Test email configuration
+- `npm run install:all` - Install all dependencies
 
-- Forms plugin for form styling
-- Typography plugin for text styling
-- Aspect ratio plugin for responsive elements
-- Container queries for component-specific responsive design
-- Fluid typography for responsive text
-- Animation utilities
+### Frontend (in frontend/ directory)
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm run serve` - Preview production build
 
-## 📱 Responsive Design
+### Backend (in backend/ directory)
+- `npm start` - Start server
+- `npm run dev` - Start in development mode
+- `npm run test-mail` - Test email configuration
 
-The app is built with responsive design using Tailwind CSS breakpoints.
+## 🧪 Testing Email Configuration
 
-
-## 📦 Deployment
-
-Build the application for production:
+To verify your email SMTP settings:
 
 ```bash
+cd backend
+npm run test-mail
+```
+
+## 🏗️ Building for Production
+
+**Frontend:**
+```bash
+cd frontend
 npm run build
 ```
+Output will be in `frontend/build/` directory.
+
+## 📧 Contact Form Backend
+
+The backend provides a `/contact` endpoint that:
+- Receives contact form submissions
+- Sends emails via Office 365 SMTP
+- Uses HTML email templates from `backend/templates/`
+
+### API Endpoint
+
+**POST** `/contact`
+
+Request body:
+```json
+{
+  "companyName": "Acme Corp",
+  "contactPerson": "John Doe",
+  "email": "john@acme.com",
+  "phone": "+91 90000 00000",
+  "message": "Hello, I'm interested in your products"
+}
+```
+
+Response:
+```json
+{
+  "ok": true,
+  "message": "Message sent successfully."
+}
+```
+
+## 🚢 Deployment
+
+### Frontend (Vercel)
+The `frontend/vercel.json` is configured for Vercel deployment. The frontend can be deployed independently.
+
+### Backend
+The backend can be deployed to:
+- Heroku
+- Railway
+- DigitalOcean
+- AWS EC2
+- Any Node.js hosting service
+
+Make sure to set all environment variables in your hosting platform.
+
+## 🛠️ Technologies
+
+### Frontend
+- React 18
+- Vite
+- TailwindCSS
+- React Router v6
+- Redux Toolkit
+- Framer Motion
+
+### Backend
+- Node.js
+- Express
+- Nodemailer
+- CORS
+- Helmet
+
+## 📝 Notes
+
+- The frontend currently uses a hardcoded API URL (`http://localhost:5050`) in development. For production, use environment variables.
+- SMTP authentication must be enabled on your Office 365 tenant for email functionality to work.
+- CORS is configured to allow requests from the frontend development server.
 
 ## 🙏 Acknowledgments
 
