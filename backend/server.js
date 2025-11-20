@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS - Allow requests from frontend domain
 app.use(
   cors({
-    origin: ["https://dn-trading-frontend.vercel.app"],
+    origin: ["https://dntrading.co.in, http://www.dntrading.co.in, http://3.89.116.134",],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   })
@@ -110,6 +110,10 @@ function renderEmailHtml(fields) {
   const table = buildHtmlTableFromObject(fields);
   return tpl.replace('{{TABLE}}', table);
 }
+
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
 
 app.post('/contact', async (req, res) => {
   try {
