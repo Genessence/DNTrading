@@ -89,7 +89,7 @@ const ContactSection = () => {
         urgency: valueToLabel(urgencyOptions, formData?.urgency),
       };
 
-      const response = await fetch('http://localhost:5050/contact', {
+      const response = await fetch('/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
